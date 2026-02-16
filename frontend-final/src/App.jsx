@@ -15,7 +15,7 @@ function App() {
       const res = await axios.get(API_URL);
       setPosts(res.data);
     } catch (err) {
-      console.error("Backend connection failed.", err);
+      console.error("Connection failed.", err);
     }
   };
 
@@ -23,14 +23,14 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Visual feedback
+    setLoading(true);
     try {
       await axios.post(API_URL, { name, message });
       setName(''); 
       setMessage('');
       await fetchPosts(); 
     } catch (err) {
-      alert("Submission failed. Is the backend live?");
+      alert("Submission failed. Is the forest path clear?");
     } finally {
       setLoading(false);
     }
@@ -38,47 +38,41 @@ function App() {
 
   return (
     <div className="container">
-      <header className="header-animate">
-        <h1>Rico's Finals Guestbook</h1>
-        <p className="subtitle">Leave a mark on my project!</p>
+      <header className="nature-header">
+        <h1>Guestbook</h1>
+        <p className="subtitle">Leave a message in our digital forest 🌿</p>
       </header>
       
       <form onSubmit={handleSubmit} className="form-section">
-        <div className="input-group">
-          <input 
-            type="text" 
-            placeholder="What's your name?" 
-            value={name} 
-            onChange={(e) => setName(e.target.value)} 
-            required 
-          />
-        </div>
-        <div className="input-group">
-          <textarea 
-            placeholder="Write a friendly message..." 
-            value={message} 
-            onChange={(e) => setMessage(e.target.value)} 
-            required 
-            rows="3"
-          />
-        </div>
+        <input 
+          type="text" 
+          placeholder="Your Name" 
+          value={name} 
+          onChange={(e) => setName(e.target.value)} 
+          required 
+        />
+        <textarea 
+          placeholder="Write a message..." 
+          value={message} 
+          onChange={(e) => setMessage(e.target.value)} 
+          required 
+          rows="3"
+        />
         <button type="submit" className={loading ? 'loading' : ''} disabled={loading}>
-          {loading ? 'Sending...' : 'Post Message ✨'}
+          {loading ? 'Planting...' : 'Share Message 🍃'}
         </button>
       </form>
 
       <div className="message-list">
-        <h2>Recent Activity ({posts.length})</h2>
+        <h2>Recent Messages ({posts.length})</h2>
         {posts.length === 0 ? (
-          <div className="empty-state">
-            <p>No messages yet. Be the first to say hi! 👋</p>
-          </div>
+          <p className="empty">The forest is quiet... be the first to speak! 🍄</p>
         ) : (
           posts.map((p, index) => (
             <div key={p.id} className="message-card" style={{ animationDelay: `${index * 0.1}s` }}>
               <div className="card-header">
                 <h4>{p.name}</h4>
-                <span className="timestamp">Just now</span>
+                <span className="timestamp">Gathered recently</span>
               </div>
               <p>{p.message}</p>
             </div>
