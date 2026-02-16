@@ -38,10 +38,10 @@ function App() {
 
   return (
     <div className="container">
-      <header className="nature-header">
-        <h1>Guestbook</h1>
-        <p className="subtitle">Leave a message in our digital forest 🌿</p>
-      </header>
+    <header className="nature-header">
+      <h1>Guestbook</h1>
+      <p className="subtitle">Leave a message for me 🌿</p>
+    </header>
       
       <form onSubmit={handleSubmit} className="form-section">
         <input 

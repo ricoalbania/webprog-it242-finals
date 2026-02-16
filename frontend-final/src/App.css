@@ -15,8 +15,14 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  /* Soft gradient like a forest floor */
-  background: radial-gradient(circle at center, #2d4a2d 0%, var(--forest-dark) 100%);
+  
+  /* Nature Background Image with a Dark Overlay for readability */
+  background: linear-gradient(rgba(15, 23, 15, 0.85), rgba(15, 23, 15, 0.85)), 
+              url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2560&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Parallax effect */
+  
   color: var(--cream);
   padding: 2rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -26,30 +32,33 @@
 .container {
   width: 100%;
   max-width: 600px;
-  background: rgba(255, 255, 255, 0.05); /* Transparent leaf-filter effect */
-  backdrop-filter: blur(12px);
+  /* Slight glassmorphism to let the forest peek through */
+  background: rgba(255, 255, 255, 0.03); 
+  backdrop-filter: blur(16px);
   padding: 2.5rem;
-  border-radius: 30px; /* Rounder, more organic corners */
-  border: 1px solid rgba(163, 177, 138, 0.2);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  border-radius: 30px; 
+  border: 1px solid rgba(163, 177, 138, 0.15);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+  margin-top: 20px;
 }
 
 h1 {
-  font-size: 2.8rem;
+  font-size: 3rem;
   margin-bottom: 0.5rem;
-  /* Earthy gradient */
   background: linear-gradient(to right, var(--leaf-light), var(--soft-wood));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 800;
   text-align: center;
+  letter-spacing: -1px;
 }
 
 .subtitle {
   color: var(--leaf-light);
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   font-style: italic;
+  font-size: 1.1rem;
   opacity: 0.9;
 }
 
@@ -58,7 +67,7 @@ input, textarea {
   width: 100%;
   padding: 14px 18px;
   margin-bottom: 1.2rem;
-  background: rgba(254, 250, 224, 0.08);
+  background: rgba(254, 250, 224, 0.05);
   border: 1.5px solid var(--moss-green);
   border-radius: 15px;
   color: var(--cream);
@@ -69,14 +78,14 @@ input, textarea {
 
 input:focus, textarea:focus {
   border-color: var(--leaf-light);
-  background: rgba(254, 250, 224, 0.12);
-  box-shadow: 0 0 15px rgba(163, 177, 138, 0.2);
+  background: rgba(254, 250, 224, 0.1);
+  box-shadow: 0 0 20px rgba(163, 177, 138, 0.15);
 }
 
 /* Submit Button */
 button {
   width: 100%;
-  padding: 14px;
+  padding: 16px;
   background: var(--earth-brown);
   color: var(--cream);
   border: none;
@@ -84,46 +93,47 @@ button {
   font-weight: 700;
   font-size: 1.1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 button:hover {
   background: var(--soft-wood);
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(188, 108, 37, 0.4);
+  box-shadow: 0 8px 25px rgba(188, 108, 37, 0.4);
 }
 
-button:disabled {
-  background: #555;
-  cursor: not-allowed;
-  transform: none;
+button:active {
+  transform: translateY(0px);
 }
 
 /* Message Cards */
 .message-list {
-  margin-top: 3rem;
+  margin-top: 3.5rem;
 }
 
 .message-list h2 {
   color: var(--leaf-light);
-  border-bottom: 1px solid rgba(163, 177, 138, 0.2);
-  padding-bottom: 0.5rem;
+  font-size: 1.5rem;
+  border-bottom: 1px solid rgba(163, 177, 138, 0.1);
+  padding-bottom: 0.8rem;
   margin-bottom: 1.5rem;
+  text-align: center;
 }
 
 .message-card {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.02);
   padding: 1.5rem;
   border-radius: 20px;
   margin-bottom: 1.2rem;
   border-left: 6px solid var(--moss-green);
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
   animation: fadeIn 0.6s ease-out both;
 }
 
 .message-card:hover {
-  transform: scale(1.02);
-  background: rgba(163, 177, 138, 0.1);
+  transform: translateX(8px);
+  background: rgba(163, 177, 138, 0.08);
   border-left-color: var(--leaf-light);
 }
 
@@ -132,23 +142,21 @@ button:disabled {
   color: var(--soft-wood);
   font-size: 1rem;
   font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 .message-card p {
-  margin: 0.5rem 0 0 0;
+  margin: 0.6rem 0 0 0;
   font-size: 1.05rem;
   line-height: 1.6;
   color: var(--cream);
+  opacity: 0.95;
 }
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(15px); }
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-.header-animate h1 {
-  animation: slideDown 0.8s ease-out;
 }
 
 @keyframes slideDown {
